@@ -3,6 +3,7 @@
   "name": "Get YouTube preview",
   "version": "1.0",
   "description": "Get full-size preview from youtube",
+  "permissions": ["tabs"],
   "icons": {
       "128": "icon.png"
   },
@@ -11,5 +12,8 @@
           "matches": [ "https://www.youtube.com/*" ],
           "js": [ "app.js" ]
       }
-  ]
+  ],
+  "action": {
+    "default_popup": "app.html"
+  }
 }
