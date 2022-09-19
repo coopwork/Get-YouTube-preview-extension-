@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Get YouTube preview",
+  "version": "1.0",
+  "description": "Get full-size preview from youtube",
+  "icons": {
+      "128": "icon.png"
+  },
+  "content_scripts": [
+      {
+          "matches": [ "https://www.youtube.com/*" ],
+          "js": [ "app.js" ]
+      }
+  ]
+}
