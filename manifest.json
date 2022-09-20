@@ -3,17 +3,22 @@
   "name": "Get YouTube preview",
   "version": "1.0",
   "description": "Get full-size preview from youtube",
-  "permissions": ["tabs"],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "listeners",
+    "https://ajax.googleapis.com/"
+],
   "icons": {
       "128": "icon.png"
   },
   "content_scripts": [
       {
-          "matches": [ "https://www.youtube.com/*" ],
+          "matches": [ "https://www.youtube.com/watch*" ],
           "js": [ "app.js" ]
       }
   ],
   "action": {
-    "default_popup": "app.html"
+    "default_popup": "popup.html"
   }
 }
