@@ -1,20 +1,14 @@
-  const 
-    playerSettings = document.querySelector('.ytp-right-controls'),
-    integration = document.createElement("button");
+const
+  lastTab = window.location.href,
+  integration = document.createElement("button");
+let
+  playerSettings = document.querySelector('.ytp-right-controls') || '';
 
-  integration.addEventListener('click', ()=>{
-    // const preview_URL = document.querySelector('link[rel="image_src"]').getAttribute('href');
-    // window.location.reload();
-    // window.open(window.location.href).window.location(document.querySelector('link[rel="image_src"]').getAttribute('href'));
-    window.open(document.querySelector('link[rel="image_src"]').getAttribute('href'));
-  })
+function openPreview() {
+  window.open(document.querySelector('link[rel="image_src"]').getAttribute('href'));
+}
 
-  console.log(window.location.href);
-
-  setInterval(() => {
-    playerSettings.prepend(integration);
-    
-  }, 1000);
+function createPlayerIcon() {
   playerSettings.prepend(integration);
   integration.classList = 'ytp-button';
   integration.setAttribute('aria-haspopup', 'true');
@@ -22,7 +16,6 @@
   integration.setAttribute('data-title-no-tooltip', 'Get preview');
   integration.setAttribute('title', 'Get preview');
   integration.setAttribute('style', '');
-  // integration.setAttribute('onClick', `window.open("${preview_URL}")`);
   integration.innerHTML=`
 
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,3 +26,29 @@
   </svg>
   
   `;
+}
+
+if (localStorage.getItem('reloadWithOpenPreview')) {
+  openPreview();
+  localStorage.removeItem('reloadWithOpenPreview');
+}
+
+integration.addEventListener('click', ()=>{
+  if (lastTab == window.location.href) {
+    openPreview();
+  } else {
+    localStorage.setItem('reloadWithOpenPreview', 'true');
+    window.location.reload();
+  }
+})
+
+if (!!playerSettings) {
+  createPlayerIcon();
+}
+
+setInterval(() => {
+  playerSettings = document.querySelector('.ytp-right-controls') || '';
+  if (!!playerSettings) {
+    createPlayerIcon();
+  }
+}, 1000);

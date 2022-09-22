@@ -5,14 +5,15 @@
   "description": "Get full-size preview from youtube",
   "permissions": [
     "tabs",
-    "activeTab"
+    "activeTab",
+    "storage"
 ],
   "icons": {
       "128": "icon.png"
   },
   "content_scripts": [
       {
-          "matches": [ "https://www.youtube.com/watch*" ],
+          "matches": [ "https://www.youtube.com/*" ],
           "js": [ "app.js" ]
       }
   ],
