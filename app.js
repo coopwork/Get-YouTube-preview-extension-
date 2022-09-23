@@ -2,11 +2,7 @@ const
   lastTab = window.location.href,
   integration = document.createElement("button");
 let
-  playerSettings = document.querySelector('.ytp-right-controls') || '';
-
-function openPreview() {
-  window.open(document.querySelector('link[rel="image_src"]').getAttribute('href'));
-}
+  playerSettings = document.querySelector('.ytp-right-controls') || false;
 
 function createPlayerIcon() {
   playerSettings.prepend(integration);
@@ -28,27 +24,23 @@ function createPlayerIcon() {
   `;
 }
 
+function openPreview() {
+  window.open('https://img.youtube.com/vi/' + window.location.href.split('/').reverse()[0].split('=')[1].split('&')[0] + '/maxresdefault.jpg');
+}
+
 if (localStorage.getItem('reloadWithOpenPreview')) {
   openPreview();
   localStorage.removeItem('reloadWithOpenPreview');
 }
 
-integration.addEventListener('click', ()=>{
-  if (lastTab == window.location.href) {
-    openPreview();
-  } else {
-    localStorage.setItem('reloadWithOpenPreview', 'true');
-    window.location.reload();
-  }
-})
+integration.addEventListener('click', openPreview);
 
-if (!!playerSettings) {
-  createPlayerIcon();
-}
-
-setInterval(() => {
-  playerSettings = document.querySelector('.ytp-right-controls') || '';
+let autoIconCreator = setInterval(() => {
+  playerSettings = document.querySelector('.ytp-right-controls') || false;
   if (!!playerSettings) {
     createPlayerIcon();
+  } else {
+    createPlayerIcon();
+    clearTimeout(autoIconCreator);
   }
-}, 1000);
+}, 2500);
