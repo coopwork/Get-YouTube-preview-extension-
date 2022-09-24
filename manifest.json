@@ -5,8 +5,7 @@
   "description": "Get full-size preview from youtube",
   "permissions": [
     "tabs",
-    "activeTab",
-    "storage"
+    "activeTab"
 ],
   "icons": {
       "128": "icon.png"
